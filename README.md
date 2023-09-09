@@ -4,7 +4,7 @@ This repository serves as a backup and remote access for C++ coding challenges.
 Topics covered include:
 - C++ and Programming Fundamentals
 - Arrays and Vectors
-- Pointer and References
+- Pointers and References
 - OOP: Classes and Objects
 - Operator Overloading
 - Inheritance
