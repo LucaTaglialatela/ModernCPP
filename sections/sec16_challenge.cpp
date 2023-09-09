@@ -1,6 +1,17 @@
 #include "sec16_challenge.h"
+#include "sec18_challenge.h"
+#include <memory>
 
 using namespace std;
+
+// Implementation of section 18 exception classes
+const char *IllegalBalanceException::what() const noexcept {
+    return "Illegal balance exception";
+}
+
+const char *InsufficientFundsException::what() const noexcept {
+    return "Insufficient funds exception";
+}
 
 // Printable Interface implementation
 ostream &operator<<(ostream &os, I_Printable &obj) {
@@ -11,6 +22,9 @@ ostream &operator<<(ostream &os, I_Printable &obj) {
 // Base Account class implementation
 Account::Account(string name, double balance)
     : name {name}, balance {balance} {
+        if (balance < 0.0) {
+            throw IllegalBalanceException();
+        }
 }
 
 bool Account::deposit(double amount) {
@@ -26,6 +40,7 @@ bool Account::withdraw(double amount) {
         balance -= amount;
         return true;
     }
+    throw InsufficientFundsException();
     return false;
 }
 
@@ -144,4 +159,32 @@ void section_16_challenge() {
     deposit(accounts, 1000);
     withdraw(accounts, 2000);
     display(accounts);
+}
+
+void section_18_challenge() {
+    unique_ptr<Account> jimini_acc;
+    unique_ptr<Account> jones_acc;
+
+    try {
+        jimini_acc = make_unique<Savings_Account> ("Jimini", -2000);
+        cout << *jimini_acc << endl;
+    }
+    catch (const IllegalBalanceException &ex) {
+        cerr << ex.what() << endl;
+    }
+
+    try {
+        jones_acc = make_unique<Savings_Account> ("Jones", 1000);
+        cout << *jones_acc << endl;
+        jones_acc->withdraw(500);
+        cout << *jones_acc << endl;
+        jones_acc->withdraw(1000);
+        cout << *jones_acc << endl;
+    }
+    catch (const IllegalBalanceException &ex) {
+        cerr << ex.what() << endl;
+    }
+    catch (const InsufficientFundsException &ex) {
+        cerr << ex.what() << endl;
+    }
 }
