@@ -12,6 +12,8 @@
 #include "sec16_challenge.h" // Refactored sec15 challenge, includes sec18 challenge
 #include "sec17_challenge.h"
 #include "sec18_challenge.h"
+#include "sec19_challenge.h"
+#include "sec20_challenge.h"
 
 int main() {
     // section_4_challenge();
@@ -27,7 +29,13 @@ int main() {
     // section_15_challenge();
     // section_16_challenge();
     // section_17_challenge();
-    section_18_challenge();
+    // section_18_challenge();
+    // section_19_challenge_1();
+    // section_19_challenge_2();
+    // section_19_challenge_3();
+    // section_20_challenge_1();
+    // section_20_challenge_2();
+    section_20_challenge_3();
 
     return 0;
 }
